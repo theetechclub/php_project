@@ -1,4 +1,6 @@
 Home Automation Major Project
 
 1. Php Side scripting
-2. Saty tuned...
+2. Ping directory contain script by which app can check wether or not server is up by sending up a request to perticuler port on beaglebone.
+3. Scripts folder contain php scripts used to connect to database and other importent scripts
+4. root folder contain all the scripts which are the actual interface between App and Baglebone
