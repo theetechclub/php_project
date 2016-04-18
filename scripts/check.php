@@ -3,8 +3,8 @@
  	"/sys/..." string because i forget it's exact location
 	and also see the line 7 or near and replace "DirStartName"
 	with the name of folder with gpio number... :) */
-define("LOCATION", "DirnameFromRoot");//Include forward slash in last
-define("DIRSTARTNAME", "DirStartName");
+define("LOCATION", "/sys/class/gpio/");//Include forward slash in last
+define("DIRSTARTNAME", "gpio");
 function check(int gpio){
 	if(!file_exists(LOCATION.$gpio))
 	{
