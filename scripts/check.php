@@ -5,7 +5,7 @@
 	with the name of folder with gpio number... :) */
 $filename = LOCATION.DIRSTARTNAME.$gpio."/direction";
 echo $filename."<br>";
-function check(int gpio){
+function check($gpio){
 	if(file_exists(LOCATION.DIRSTARTNAME.$gpio))
 	{
 		$flag = 0;
