@@ -1,4 +1,8 @@
 <?php
+
+define("LOCATION", "/sys/class/gpio/");//Include forward slash in last
+define("DIRSTARTNAME", "gpio");
+
 include("scripts/check.php");
 
 $gpio = $_GET['gpio'];

@@ -3,8 +3,6 @@
  	"/sys/..." string because i forget it's exact location
 	and also see the line 7 or near and replace "DirStartName"
 	with the name of folder with gpio number... :) */
-define("LOCATION", "/sys/class/gpio/");//Include forward slash in last
-define("DIRSTARTNAME", "gpio");
 $filename = LOCATION.DIRSTARTNAME.$gpio."/direction";
 echo $filename."<br>";
 function check(int gpio){
