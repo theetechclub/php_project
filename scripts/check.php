@@ -8,12 +8,13 @@ echo $filename."<br>";
 function check($gpio){
 	if(file_exists(LOCATION.DIRSTARTNAME.$gpio))
 	{
-		$flag = 0;
+		global $filename;
 		$f = fopen($filename,"r");
-        $f=fread($f,filesize($filename));
-		if($f=="in"||$f=="in\n"){//direction is not set to =>out<=
+        	$read=fread($f,filesize($filename));
+		fclose($f);
+		if($read=="in"||$read=="in\n"){//direction is not set to =>out<=
 			system("echo out > ".$filename);
-			fclose($f);
+			//echo shell_exec("cat ".$filename);
 			return 2;
 		}
 		else

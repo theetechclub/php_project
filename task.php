@@ -1,6 +1,6 @@
 <?php
 echo "Hello I am here to perform tasks<br />";
-
+ini_set("display_errors",1);
 //POST METHOD VARIABLES Must be with proper resions  DP => do for post
 //	Lines are going to be comment because no possible use of them in project
 //$dp_board = isset($_POST['b']) ? $_POST['b'] : NULL; //Board number
@@ -11,7 +11,7 @@ $second = isset($_POST['ss']) ? $_POST['ss'] : 0;	//seconds to turn off	|
 $dp_task = isset($_POST['task']) ? $_POST['task'] : "OFF";
 $dp_do = isset($_POST['setwettime']) ? $_POST['setwettime'] : NULL;	//To know wether to set time or not
 $dp_times = isset($_POST['shedule']) ? $_POST['shedule'] : "1";//1 for run once and 0 for repeat infinite
-echo "DP :: board $dp_board, Pin $dp_pin, Hours $hours, Minute $minute, Seconds $second, Task $dp_task, What to do => $dp_do, Times to do => $dp_times<br />";
+echo "DP :: Pin $dp_pin, Hours $hours, Minute $minute, Seconds $second, Task $dp_task, What to do => $dp_do, Times to do => $dp_times<br />";
 //$dp_ = isset($_POST['']) ? $_POST[''] : NULL;
 
 //Remember phpjobscheduler use POST to send GET request
@@ -25,13 +25,13 @@ if($dg_task==NULL&&isset($_POST['task']))
 $dg_pin = isset($_GET['pin']) ? $_GET['pin'] : NULL;
 if($dg_pin==NULL&&isset($_POST['pin']))
 { $dg_pin = $_POST['pin']; }
-echo "DG :: Task $dg_task, Board $dg_board, Pin $dg_pin<br />";
+echo "DG :: Task $dg_task, Pin $dg_pin<br />";
 //$dg_ = isset($_GET['']) ? $_GET[''] : NULL;
 
 //Other Required Variables Must be with proper resions
 $time = time();//Can be used to store seconds of current turn on time before reduce current time from date
 /*so here we go*/ 
-$script = "http://localhost/armature/task.php?task=";// Note change only when you konw what you are doning
+$script = "http://localhost:8080/php_project/task.php?task=";// Note change only when you konw what you are doning
 $name = NULL; //Name of task;
 //Task Lists are below
 /*
@@ -43,9 +43,9 @@ $name = NULL; //Name of task;
 
 if($dp_do!=NULL)
 {
-	//die( "IN DP");
+	die( "IN DP");//Comment it when starting to add schedule in database
 	echo "Entered in 1. <br />";
-	$script.=$dp_task."&board=".$dp_board."&pin=".$dp_pin;
+	$script.=$dp_task."&pin=".$dp_pin;
 	echo "$script<br />";
 	$name = "switch $dp_task the pin #$dp_pin of board #$dp_board at $hours:$minute:$second and do it ";
 	if($dp_times)
@@ -70,12 +70,12 @@ else if($dg_task=="ON")
 {
 	//Write your code here
 	echo "Entered in 2. <br />";
-	$result=shell_exec("python scripts/py/switch.py ".$dg_board." ".$_POST['p'].$dg_pin." 05");
-	echo("python scripts/py/switch.py ".$dg_board." ".$_POST['p'].$dg_pin." 05");
-	$__TYPE__="On Off Update";
-	$_DO="ON";
-	include("scripts/db/update.php");
-	echo $__err;
+	//$result=shell_exec("python scripts/py/switch.py ".$dg_board." ".$_POST['p'].$dg_pin." 05");
+	//Adding code which work for this project (NOTE: above code is for previous project)
+	$_GET['gpio'] = $dg_pin;
+	$_GET['toDo'] = 1;
+	include("switch.php");
+	echo("switch.php ".$dg_task." ".$dp_pin.$dg_pin);
 }
 
 //TO TURN OFF DEVICE
@@ -83,12 +83,12 @@ else if($dg_task=="OFF")
 {
 	//Write your code here
 	echo "Entered in 3. <br />";
-	shell_exec("python scripts/py/switch.py ".$dg_board." ".$_POST['p'].$dg_pin." 04");
-	echo("python scripts/py/switch.py ".$dg_board." ".$_POST['p'].$dg_pin." 04");
-	$__TYPE__="On Off Update";
-	$_DO="OFF";
-	include("scripts/db/update.php");
-	echo $__err;
+	//shell_exec("python scripts/py/switch.py ".$dg_board." ".$_POST['p'].$dg_pin." 04");
+	// Same as above comment in Lvl - 1 IF statement
+	$_GET['gpio'] = $dg_pin;
+	$_GET['toDo'] = 0;
+	include("switch.php");
+	echo("switch.php ".$dg_task." ".$dp_pin.$dg_pin);
 }
 
 //New Task Name Don't forget to list it above
