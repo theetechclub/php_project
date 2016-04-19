@@ -2,7 +2,8 @@
 echo "Hello I am here to perform tasks<br />";
 
 //POST METHOD VARIABLES Must be with proper resions  DP => do for post
-$dp_board = isset($_POST['b']) ? $_POST['b'] : NULL; //Board number
+//	Lines are going to be comment because no possible use of them in project
+//$dp_board = isset($_POST['b']) ? $_POST['b'] : NULL; //Board number
 $dp_pin = isset($_POST['p']) ? $_POST['p'] : NULL;	//pin number
 $hours = isset($_POST['hh']) ? $_POST['hh'] : NULL;	//hours when to turn off	|
 $minute = isset($_POST['mm']) ? $_POST['mm'] : NULL;	//minutes to turn off	| According to Real time of current day
@@ -18,9 +19,9 @@ echo "DP :: board $dp_board, Pin $dp_pin, Hours $hours, Minute $minute, Seconds 
 $dg_task = isset($_GET['task']) ? $_GET['task'] : NULL;
 if($dg_task==NULL&&isset($_POST['task']))
 { $dg_task = $_POST['task']; }
-$dg_board = isset($_GET['board']) ? $_GET['board'] : NULL;
-if($dg_board==NULL&&isset($_POST['board']))
-{ $dg_board = $_POST['board']; }
+//$dg_board = isset($_GET['board']) ? $_GET['board'] : NULL;
+//if($dg_board==NULL&&isset($_POST['board']))
+//{ $dg_board = $_POST['board']; }
 $dg_pin = isset($_GET['pin']) ? $_GET['pin'] : NULL;
 if($dg_pin==NULL&&isset($_POST['pin']))
 { $dg_pin = $_POST['pin']; }
