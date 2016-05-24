@@ -15,7 +15,7 @@ else if($toDo == 0)$toDo=1;
 
 echo $toDo;
 
-die(" End here");
+//die(" End here");
 
 $string = "echo $toDo > ".LOCATION.DIRSTARTNAME.$gpio."/value";
 
